@@ -63,6 +63,32 @@
                         "description": "Falha ao atualizar filme"
                     }
                 }
+            },
+            "delete": {
+                "tags": ["Movie"],
+                "summary": "Excluir um filme",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID do filme a ser excluído"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Filme excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "Filme não encontrado"
+                    },
+                    "500": {
+                        "description": "Falha ao deletar filme"
+                    }
+                }
             }
         }
     },
