@@ -114,7 +114,19 @@ app.delete("/movies/:id", async (req, res) => {
 });
 
 app.get("/movies/:genreName", async (req, res) => {
+  const genreName = req.params.genreName;
+
   try {
+    const genre = await prisma.genre.findFirst({
+      where: {
+        name: { equals: genreName, mode: "insensitive" },
+      },
+    });
+
+    if (!genre) {
+      return res.status(404).send({ message: "Gênero não encontrado" });
+    }
+
     const moviesFilteredByGenreName = await prisma.movie.findMany({
       include: {
         genres: true,
